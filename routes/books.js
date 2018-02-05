@@ -1,9 +1,8 @@
-const https = require('https');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 function getBookRating(id) {
   const xmlHttp = new XMLHttpRequest();
-  xmlHttp.open('GET', `https://5gj1qvkc5h.execute-api.us-east-1.amazonaws.com/dev/findBookById/${id}`, false); // false for synchronous request
+  xmlHttp.open('GET', `https://5gj1qvkc5h.execute-api.us-east-1.amazonaws.com/dev/findBookById/${id}`, false);
   xmlHttp.send(null);
   const ratingObj = JSON.parse(xmlHttp.responseText);
   return ratingObj.rating;
@@ -54,5 +53,13 @@ module.exports =
       console.log(books);
       response(books);
     },
+    // {
+    //     method: 'GET',
+    //     path: '/uploadData'
+    //     handler:(request, response)=>{
+    //         const books = getURLData('http://localhost:9876/books');
+    //         console.log(books)
+    //     }
+    // }
   };
 
