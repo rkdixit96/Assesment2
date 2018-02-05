@@ -1,14 +1,14 @@
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
-function getBookRating(id) {
+const getBookRating = (id) => {
   const xmlHttp = new XMLHttpRequest();
   xmlHttp.open('GET', `https://5gj1qvkc5h.execute-api.us-east-1.amazonaws.com/dev/findBookById/${id}`, false);
   xmlHttp.send(null);
   const ratingObj = JSON.parse(xmlHttp.responseText);
   return ratingObj.rating;
-}
+};
 
-function filterBasedOnAuthor(bookArray) {
+const filterBasedOnAuthor = (bookArray) => {
   const groupedDict = {};
   const bookData = bookArray.slice();
   for (let book = 0; book < bookArray.length; book += 1) {
@@ -22,18 +22,18 @@ function filterBasedOnAuthor(bookArray) {
   }
   // console.log(groupedDict);
   return groupedDict;
-}
+};
 
 
-function jsonParser(data) {
+const jsonParser = (data) => {
   const parsedJSON = JSON.parse(data);
   const bookArray = parsedJSON.books;
   // console.log(bookArray);
   return filterBasedOnAuthor(bookArray);
-}
+};
 
 
-function getURLData(url) {
+const getURLData = (url) => {
   const xmlHttp = new XMLHttpRequest();
   xmlHttp.open('GET', url, false); // false for synchronous request
   xmlHttp.send(null);
@@ -42,4 +42,11 @@ function getURLData(url) {
   //     response.setEncoding('UTF8');
   //     response.on('data', data => jsonParser(data));
   //   });
-}
+};
+
+module.exports = {
+  getURLData,
+  jsonParser,
+  filterBasedOnAuthor,
+  getBookRating,
+};
